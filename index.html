@@ -1165,33 +1165,7 @@ function pdrDelete(i) {
   renderPdrMapMarkers();
 }
 
-function pdrExport() {
-  if (!PDR_POINTS.length) { alert('Немає жодної точки для експорту'); return; }
-  const json = JSON.stringify(PDR_POINTS, null, 2);
-  const filename = 'pdr_' + new Date().toISOString().slice(0,10) + '.json';
-  const bytes = new TextEncoder().encode(json);
-  const blob = new Blob([bytes], {type:'application/json'});
 
-  // iOS Safari 15+ — Web Share API
-  if (navigator.share && navigator.canShare) {
-    try {
-      const file = new File([blob], filename, {type:'application/json'});
-      if (navigator.canShare({files:[file]})) {
-        navigator.share({files:[file], title:'ПДР точки'});
-        return;
-      }
-    } catch(e) {}
-  }
-
-  // Всі інші — Blob URL
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => { URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
-}
 
 // Маркери ПДР на карті — тільки поточний сектор
 function renderPdrMapMarkers() {
@@ -1590,24 +1564,21 @@ function renderRentMapMarkers() {
     rentMapMarkers.push(m);
   });
 }
+function exportJSON(data, filename) {
+  const json = JSON.stringify(data, null, 2);
+  const w = window.open('', '_blank');
+  w.document.write('<pre style="font-family:monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;">' + json + '</pre>');
+  w.document.title = filename;
+}
+
+function pdrExport() {
+  if (!PDR_POINTS.length) { alert('Немає жодної точки для експорту'); return; }
+  exportJSON(PDR_POINTS, 'pdr_' + new Date().toISOString().slice(0,10) + '.json');
+}
 
 function rentExport() {
   if (!RENT_POINTS.length) { alert('Немає орендованих місць для експорту'); return; }
-  const json = JSON.stringify(RENT_POINTS, null, 2);
-  const filename = 'rent_' + new Date().toISOString().slice(0,10) + '.json';
-  const bytes = new TextEncoder().encode(json);
-  const blob = new Blob([bytes], {type:'application/json'});
-  if (navigator.share && navigator.canShare) {
-    try {
-      const file = new File([blob], filename, {type:'application/json'});
-      if (navigator.canShare({files:[file]})) { navigator.share({files:[file], title:'Оренда'}); return; }
-    } catch(e) {}
-  }
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+  exportJSON(RENT_POINTS, 'rent_' + new Date().toISOString().slice(0,10) + '.json');
 }
 
 // pick-mode для rent-wizard (прозорий фон під час тапу)
