@@ -174,6 +174,139 @@ html, body { height: 100%; overflow: hidden; background: #0d1117; color: #e6edf3
   display: flex; align-items: center; justify-content: center;
 }
 #fab-gps.on { background: #3fb950; }
+
+/* ПДР FAB — над GPS кнопкою */
+#fab-pdr {
+  position: fixed; bottom: 0; right: 14px; z-index: 1999;
+  width: 50px; height: 50px; border-radius: 50%; border: none;
+  background: #da3633; color: #fff; font-size: 22px; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.6);
+  display: flex; align-items: center; justify-content: center;
+}
+#fab-pdr.active { background: #ff7b72; }
+
+/* ОРЕНДА FAB */
+#fab-rent {
+  position: fixed; bottom: 0; right: 14px; z-index: 1999;
+  width: 50px; height: 50px; border-radius: 50%; border: none;
+  background: #da3633; color: #fff; font-size: 22px; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.6);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ПДР Overlay — панель поверх всього */
+#pdr-overlay {
+  display: none; position: fixed; inset: 0; z-index: 5000;
+  background: rgba(0,0,0,.7); align-items: flex-end;
+}
+#pdr-overlay.show { display: flex; }
+#pdr-box {
+  width: 100%; max-height: 80vh; background: #161b22;
+  border-radius: 16px 16px 0 0; border-top: 2px solid #30363d;
+  display: flex; flex-direction: column;
+}
+#pdr-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid #30363d; flex-shrink: 0;
+}
+#pdr-title { font-size: 17px; font-weight: bold; }
+#pdr-close {
+  background: none; border: none; color: #6e7681; font-size: 22px; cursor: pointer; padding: 4px;
+}
+#pdr-list-wrap { flex: 1; overflow-y: auto; padding: 10px 12px; }
+#pdr-list-empty { color: #6e7681; font-size: 14px; text-align: center; padding: 20px 0; line-height: 1.6; }
+#pdr-actions {
+  display: flex; gap: 8px; padding: 12px; border-top: 1px solid #30363d; flex-shrink: 0;
+}
+.pdr-btn {
+  flex: 1; padding: 14px; font-size: 15px; font-weight: bold;
+  border: none; border-radius: 10px; cursor: pointer;
+}
+.pdr-add { background: #da3633; color: #fff; }
+.pdr-export { background: #1f6feb; color: #fff; }
+
+/* Картка ПДР точки в списку */
+.pdr-card {
+  background: #0d1117; border: 1px solid #30363d; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.pdr-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.pdr-card-name { font-size: 14px; font-weight: bold; color: #ff7b72; }
+.pdr-card-del {
+  background: #21262d; border: 1px solid #30363d; border-radius: 6px;
+  color: #ff7b72; font-size: 16px; cursor: pointer;
+  padding: 6px 10px; min-width: 36px; min-height: 36px;
+}
+.pdr-card-desc { font-size: 12px; color: #6e7681; margin-top: 3px; line-height: 1.4; }
+.pdr-card-zone {
+  display: inline-block; margin-top: 5px; font-size: 11px;
+  background: #1f2d3d; color: #79c0ff; border-radius: 4px; padding: 2px 7px;
+}
+
+/* ПДР Wizard */
+#pdr-wizard {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 6000;
+}
+#pdr-wizard.show { display: block; }
+#pdr-wizard.pick-mode {
+  /* Під час тапу на карту — тільки нижня панель, без фону */
+  background: transparent;
+  pointer-events: none; /* весь wizard не перехоплює кліки */
+}
+#pdr-wizard.pick-mode #wiz-box {
+  pointer-events: all; /* але сам бокс — так */
+}
+#wiz-box {
+  width: 100%; background: #161b22;
+  border-radius: 16px 16px 0 0; border-top: 2px solid #da3633;
+  padding: 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.8);
+}
+#wiz-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+}
+#wiz-step-lbl { font-size: 12px; color: #da3633; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+#wiz-cancel {
+  background: none; border: 1px solid #30363d; border-radius: 8px;
+  color: #6e7681; font-size: 13px; padding: 5px 10px; cursor: pointer;
+}
+#wiz-instruction {
+  font-size: 16px; font-weight: bold; color: #e6edf3; margin-bottom: 6px; line-height: 1.4;
+}
+#wiz-instruction .wiz-sub {
+  font-size: 13px; font-weight: normal; color: #6e7681; margin-top: 4px;
+}
+#wiz-form { margin: 12px 0; }
+#wiz-form select, #wiz-form input[type=text] {
+  width: 100%; background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+  color: #e6edf3; font-size: 15px; padding: 12px; outline: none; margin-bottom: 8px;
+}
+#wiz-form label { display: block; font-size: 13px; color: #6e7681; margin-bottom: 4px; }
+#wiz-footer { display: flex; gap: 8px; margin-top: 4px; }
+#wiz-back-btn {
+  flex: 0 0 auto; padding: 14px 18px; background: #161b22;
+  border: 1px solid #30363d; border-radius: 10px; color: #e6edf3;
+  font-size: 15px; cursor: pointer;
+}
+#wiz-next-btn {
+  flex: 1; padding: 14px; background: #da3633; border: none;
+  border-radius: 10px; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer;
+}
+/* Підказка на карті під час wizard */
+#map-hint {
+  display: none; position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+  z-index: 4000; background: #da3633; color: #fff; border-radius: 20px;
+  padding: 8px 18px; font-size: 14px; font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,.6); pointer-events: none;
+}
+#map-hint.show { display: block; }
+/* Rent wizard pick mode */
+#rent-wizard.pick-mode {
+  pointer-events: none;
+}
+#rent-wizard.pick-mode > div {
+  pointer-events: all;
+}
 </style>
 </head>
 <body>
@@ -190,8 +323,92 @@ html, body { height: 100%; overflow: hidden; background: #0d1117; color: #e6edf3
 <!-- КАРТА (завжди видима) -->
 <div id="map"></div>
 
+<!-- Підказка під час пікінгу -->
+<div id="map-hint"></div>
+
 <!-- GPS FAB -->
 <button id="fab-gps" onclick="toggleGPS()">📍</button>
+
+<!-- ПДР FAB -->
+<button id="fab-pdr" onclick="pdrOpen()">🚫</button>
+
+<!-- ОРЕНДА FAB -->
+<button id="fab-rent" onclick="rentOpen()">🅿</button>
+
+<!-- ОРЕНДА OVERLAY -->
+<div id="rent-overlay" style="display:none;position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.7);align-items:flex-end;">
+  <div style="width:100%;max-height:80vh;background:#161b22;border-radius:16px 16px 0 0;border-top:2px solid #d29922;display:flex;flex-direction:column;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #30363d;flex-shrink:0;">
+      <div style="font-size:17px;font-weight:bold;color:#da3633;">🅿 Орендовані місця</div>
+      <button onclick="rentClose()" style="background:none;border:none;color:#6e7681;font-size:22px;cursor:pointer;padding:4px;">✕</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:10px 12px;">
+      <div id="rent-list-empty" style="color:#6e7681;font-size:14px;text-align:center;padding:20px 0;line-height:1.6;">Ще немає орендованих місць.<br>Натисни «Додати» і познач на карті.</div>
+      <div id="rent-list"></div>
+    </div>
+    <div style="display:flex;gap:8px;padding:12px;border-top:1px solid #30363d;flex-shrink:0;">
+      <button class="pdr-btn" style="flex:1;background:#da3633;color:#fff;font-weight:bold;" onclick="rentStartAdd()">＋ Додати місце</button>
+      <button class="pdr-btn pdr-export" onclick="rentExport()">⬇ Експорт</button>
+    </div>
+  </div>
+</div>
+
+<!-- ПДР OVERLAY -->
+<div id="pdr-overlay">
+  <div id="pdr-box">
+
+    <!-- Заголовок -->
+    <div id="pdr-header">
+      <div id="pdr-title">🚫 ПДР точки</div>
+      <button id="pdr-close" onclick="pdrClose()">✕</button>
+    </div>
+
+    <!-- Список доданих точок -->
+    <div id="pdr-list-wrap">
+      <div id="pdr-list-empty">Ще немає жодної точки.<br>Натисни «Додати» і познач на карті.</div>
+      <div id="pdr-list"></div>
+    </div>
+
+    <!-- Кнопки -->
+    <div id="pdr-actions">
+      <button class="pdr-btn pdr-add" onclick="pdrStartAdd()">＋ Додати точку</button>
+      <button class="pdr-btn pdr-export" onclick="pdrExport()">⬇ Експорт JSON</button>
+    </div>
+  </div>
+</div>
+
+<!-- RENT PICKER — простий: тап на карту + нотатка -->
+<div id="rent-wizard" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:6000;">
+  <div style="background:#161b22;border-radius:16px 16px 0 0;border-top:2px solid #d29922;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="font-size:12px;color:#d29922;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">Орендоване місце</div>
+      <button onclick="rentCancel()" style="background:none;border:1px solid #30363d;border-radius:8px;color:#6e7681;font-size:13px;padding:5px 10px;cursor:pointer;">✕ Скасувати</button>
+    </div>
+    <div id="rent-wiz-content"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <button id="rent-wiz-btn" onclick="rentWizNext()"
+        style="flex:1;padding:14px;background:#d29922;border:none;border-radius:10px;color:#000;font-size:16px;font-weight:bold;cursor:pointer;">
+        Далі →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ПДР WIZARD (покрокове додавання) -->
+<div id="pdr-wizard">
+  <div id="wiz-box">
+    <div id="wiz-header">
+      <div id="wiz-step-lbl">Крок 1 з 3</div>
+      <button id="wiz-cancel" onclick="wizCancel()">✕ Скасувати</button>
+    </div>
+    <div id="wiz-instruction"></div>
+    <div id="wiz-form"></div>
+    <div id="wiz-footer">
+      <button id="wiz-back-btn" onclick="wizBack()" style="display:none">← Назад</button>
+      <button id="wiz-next-btn" onclick="wizNext()">Далі →</button>
+    </div>
+  </div>
+</div>
 
 <!-- НИЖНЯ ПАНЕЛЬ -->
 <div id="bottom">
@@ -202,14 +419,11 @@ html, body { height: 100%; overflow: hidden; background: #0d1117; color: #e6edf3
   </div>
 
   <div id="tabs">
-    <div class="tab on"  onclick="goTab('sector')">⚙ Сектор</div>
-    <div class="tab"     onclick="goTab('route')">📋 Маршрут</div>
-    <div class="tab"     onclick="goTab('timer')">⏱ Таймер</div>
-    <div class="tab"     onclick="goTab('gps')">📍 Де я</div>
+    <div class="tab on" onclick="goTab('sector')">⚙ Сектор</div>
+    <div class="tab"    onclick="goTab('route')">📋 Маршрут</div>
   </div>
 
   <div id="panels">
-
     <!-- СЕКТОР -->
     <div id="p-sector" class="panel on">
       <div id="sec-grid"></div>
@@ -226,29 +440,6 @@ html, body { height: 100%; overflow: hidden; background: #0d1117; color: #e6edf3
       <div id="route-stats"></div>
       <div id="route-list"></div>
     </div>
-
-    <!-- ТАЙМЕР -->
-    <div id="p-timer" class="panel">
-      <div id="timer-panel">
-        <div id="t-lbl">Таймер фіксації (10 хв)</div>
-        <div id="t-disp">10:00</div>
-        <div id="t-btns">
-          <button class="tbtn" id="t-go"  onclick="timerStart()">▶ Старт</button>
-          <button class="tbtn" id="t-rst" onclick="timerReset()">■ Скинути</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GPS -->
-    <div id="p-gps" class="panel">
-      <button id="btn-gps" onclick="toggleGPS()">📍 Увімкнути GPS</button>
-      <div id="gps-near">GPS вимкнено</div>
-      <div id="gps-meta"></div>
-      <div id="gps-dist"></div>
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6e7681;margin-bottom:6px">Адреси поруч</div>
-      <div id="addr-list"><div style="color:#6e7681">Спочатку увімкни GPS</div></div>
-    </div>
-
   </div>
 </div>
 
@@ -266,156 +457,152 @@ const COLORS = {
 const SECS = ['1','2','3','4','5','6','7','8','9','10','11'];
 
 const PARKS = [
-  // === СЕКТОР 1 (9) ===
-  {id:'p1',  n:'вул. Клепарівська',                    lat:49.8466561,lon:24.0159639,s:31, sec:'1'},
-  {id:'p2',  n:'вул. Я. Раппапорта',                   lat:49.8449270,lon:24.0197226,s:31, sec:'1'},
-  {id:'p3',  n:'вул. Т. Шевченка',                     lat:49.8431290,lon:24.0151065,s:33, sec:'1'},
-  {id:'p4',  n:'вул. Академіка Р. Кучера',             lat:49.8440255,lon:24.0197545,s:9,  sec:'1'},
-  {id:'p5',  n:'вул. Вільна',                          lat:49.8442785,lon:24.0163554,s:9,  sec:'1'},
-  {id:'p6',  n:'вул. Братів Міхновських',              lat:49.8382797,lon:24.0042899,s:45, sec:'1'},
-  {id:'p7',  n:'вул. Яцкова',                          lat:49.8484102,lon:24.0051389,s:22, sec:'1'},
-  {id:'p8',  n:'вул. Турянського',                     lat:49.8488002,lon:24.0031656,s:15, sec:'1'},
-  {id:'p9',  n:'вул. Сембратовичів',                   lat:49.8394358,lon:24.0067772,s:0,  sec:'1'},
-  // === СЕКТОР 2 (20) ===
-  {id:'p10', n:'вул. Вагова',                          lat:49.8452178,lon:24.0248378,s:11, sec:'2'},
-  {id:'p11', n:'вул. Сянська',                         lat:49.8460835,lon:24.0280956,s:13, sec:'2'},
-  {id:'p12', n:'вул. Лазнева',                         lat:49.8455604,lon:24.0263583,s:5,  sec:'2'},
-  {id:'p13', n:'вул. Данилишина',                      lat:49.8440776,lon:24.0228989,s:5,  sec:'2'},
-  {id:'p14', n:'вул. М. Балабана',                     lat:49.8453200,lon:24.0215000,s:0,  sec:'2'},
-  {id:'p15', n:'вул. Газова',                          lat:49.8461000,lon:24.0243000,s:0,  sec:'2'},
-  {id:'p16', n:'вул. Куліша',                          lat:49.8458000,lon:24.0237000,s:0,  sec:'2'},
-  {id:'p17', n:'вул. Медова',                          lat:49.8456000,lon:24.0252000,s:0,  sec:'2'},
-  {id:'p18', n:'вул. Шпитальна, 1 (Магнус)',           lat:49.8447421,lon:24.0232634,s:18, sec:'2'},
-  {id:'p19', n:'вул. Джерельна',                       lat:49.8495823,lon:24.0202760,s:38, sec:'2'},
-  {id:'p20', n:'вул. Шпитальна',                       lat:49.8447421,lon:24.0232634,s:18, sec:'2'},
-  {id:'p21', n:'вул. Крехівська',                      lat:49.8474887,lon:24.0201359,s:9,  sec:'2'},
-  {id:'p22', n:'вул. Під Дубом',                       lat:49.8504524,lon:24.0250813,s:28, sec:'2'},
-  {id:'p23', n:'вул. Шолом Алейхема',                  lat:49.8448202,lon:24.0202600,s:19, sec:'2'},
-  {id:'p24', n:'вул. Котлярська',                      lat:49.8455179,lon:24.0228364,s:14, sec:'2'},
-  {id:'p25', n:'вул. Таманська',                       lat:49.8464000,lon:24.0270000,s:0,  sec:'2'},
-  {id:'p26', n:'пл. Святого Теодора',                  lat:49.8471964,lon:24.0271171,s:19, sec:'2'},
-  {id:'p27', n:'вул. Академіка Люльки',                lat:49.8488074,lon:24.0255765,s:9,  sec:'2'},
-  {id:'p28', n:'пр. Чорновола, 65',                    lat:49.8590775,lon:24.0200619,s:37, sec:'2'},
-  {id:'p29', n:'пр. Чорновола, 45',                    lat:49.8552175,lon:24.0220075,s:0,  sec:'2'},
-  // === СЕКТОР 3 (6) ===
-  {id:'p30', n:'вул. Костюшка',                        lat:49.8397183,lon:24.0244638,s:20, sec:'3'},
-  {id:'p31', n:'вул. Січових Стрільців',               lat:49.8402714,lon:24.0241894,s:11, sec:'3'},
-  {id:'p32', n:'вул. С. Наливайка',                    lat:49.8432926,lon:24.0234340,s:19, sec:'3'},
-  {id:'p33', n:'вул. М. Менцинського',                 lat:49.8419836,lon:24.0221894,s:11, sec:'3'},
-  {id:'p34', n:'вул. Гребінки',                        lat:49.8417444,lon:24.0205019,s:12, sec:'3'},
-  {id:'p35', n:'вул. Гнатюка',                         lat:49.8417631,lon:24.0244834,s:22, sec:'3'},
-  // === СЕКТОР 4 (14) ===
-  {id:'p36', n:'вул. Винниченка, 32',                  lat:49.8448599,lon:24.0359406,s:0,  sec:'4'},
-  {id:'p37', n:'вул. Кривоноса, 41',                   lat:49.8473661,lon:24.0405441,s:5,  sec:'4'},
-  {id:'p38', n:'вул. Підвальна',                       lat:49.8418114,lon:24.0350976,s:15, sec:'4'},
-  {id:'p39', n:'пл. Міцкевича',                        lat:49.8391168,lon:24.0306216,s:17, sec:'4'},
-  {id:'p40', n:'вул. С. Гавришкевича',                 lat:49.8441927,lon:24.0299007,s:24, sec:'4'},
-  {id:'p41', n:'вул. Кн. Я. Осмомисла',                lat:49.8443361,lon:24.0291036,s:5,  sec:'4'},
-  {id:'p42', n:'вул. Просвіти',                        lat:49.8420296,lon:24.0382373,s:31, sec:'4'},
-  {id:'p43', n:'вул. М. Лисенка',                      lat:49.8430633,lon:24.0367331,s:12, sec:'4'},
-  {id:'p44', n:'вул. В. Винниченка',                   lat:49.8421651,lon:24.0363730,s:24, sec:'4'},
-  {id:'p45', n:'вул. Т. Бобанича',                     lat:49.8402450,lon:24.0390818,s:14, sec:'4'},
-  {id:'p46', n:'вул. Гуцульська',                      lat:49.8439301,lon:24.0386817,s:0,  sec:'4'},
-  {id:'p47', n:'вул. Винниченка, 16',                  lat:49.8421651,lon:24.0363730,s:0,  sec:'4'},
-  {id:'p48', n:'вул. Личачівська від Кармалюка',       lat:49.8400837,lon:24.0488148,s:0,  sec:'4'},
-  {id:'p49', n:'вул. Чернеча Гора, 1',                 lat:49.8378000,lon:24.0540000,s:0,  sec:'4'},
-  // === СЕКТОР 5 (6) ===
-  {id:'p50', n:'вул. Пильникарська',                   lat:49.8469085,lon:24.0296725,s:11, sec:'5'},
-  {id:'p51', n:'вул. Долинського',                     lat:49.8509631,lon:24.0268136,s:18, sec:'5'},
-  {id:'p52', n:'вул. Хімічна',                         lat:49.8540139,lon:24.0239991,s:18, sec:'5'},
-  {id:'p53', n:'вул. Пилипа Орлика',                   lat:49.8739881,lon:24.0331602,s:0,  sec:'5'},
-  {id:'p54', n:'вул. Замарстинівська',                 lat:49.8538099,lon:24.0283650,s:26, sec:'5'},
-  {id:'p55', n:'вул. І. Мазепи, 25',                   lat:49.8727169,lon:24.0405609,s:0,  sec:'5'},
-  // === СЕКТОР 6 (23) ===
-  {id:'p56', n:'вул. С. Бандери',                      lat:49.8346442,lon:24.0144984,s:63, sec:'6'},
-  {id:'p57', n:'вул. Політехнічна',                    lat:49.8340527,lon:24.0144756,s:8,  sec:'6'},
-  {id:'p58', n:'вул. Русових',                         lat:49.8342375,lon:24.0075493,s:7,  sec:'6'},
-  {id:'p59', n:'вул. Липнева',                         lat:49.8316632,lon:24.0065834,s:0,  sec:'6'},
-  {id:'p60', n:'вул. І. Тобілевича',                   lat:49.8365221,lon:24.0026944,s:22, sec:'6'},
-  {id:'p61', n:'вул. А. Горської',                     lat:49.8358233,lon:24.0012772,s:18, sec:'6'},
-  {id:'p62', n:'вул. Архітекторська',                  lat:49.8352869,lon:24.0128827,s:12, sec:'6'},
-  {id:'p63', n:'вул. Старосольських',                  lat:49.8353193,lon:24.0114878,s:15, sec:'6'},
-  {id:'p64', n:'вул. Нечуя-Левицького',                lat:49.8327768,lon:24.0163568,s:9,  sec:'6'},
-  {id:'p65', n:'вул. М. Вербицького',                  lat:49.8338377,lon:24.0178330,s:0,  sec:'6'},
-  {id:'p66', n:'вул. Коперника (від Вербицького)',      lat:49.8334678,lon:24.0189115,s:13, sec:'6'},
-  {id:'p67', n:'вул. Київська',                        lat:49.8330907,lon:24.0095040,s:18, sec:'6'},
-  {id:'p68', n:'вул. Ю. Федьковича',                   lat:49.8348330,lon:24.0020627,s:36, sec:'6'},
-  {id:'p69', n:'вул. Академіка Єфремова',              lat:49.8340656,lon:24.0109304,s:24, sec:'6'},
-  {id:'p70', n:'вул. Є. Коновальця',                   lat:49.8343641,lon:24.0091786,s:11, sec:'6'},
-  {id:'p71', n:'вул. І. Калинець',                     lat:49.8342812,lon:24.0182626,s:11, sec:'6'},
-  {id:'p72', n:'вул. Японська',                        lat:49.8334102,lon:24.0116036,s:24, sec:'6'},
-  {id:'p73', n:'вул. І. Богуна',                       lat:49.8332718,lon:24.0144032,s:15, sec:'6'},
-  {id:'p74', n:'вул. Глибока',                         lat:49.8342625,lon:24.0132819,s:15, sec:'6'},
-  {id:'p75', n:'вул. Новий Світ',                      lat:49.8336059,lon:24.0125931,s:31, sec:'6'},
-  {id:'p76', n:'вул. Здоров\'я',                       lat:49.8325523,lon:24.0104917,s:6,  sec:'6'},
-  {id:'p77', n:'вул. Смаль-Стоцького',                 lat:49.8322000,lon:24.0058000,s:0,  sec:'6'},
-  {id:'p78', n:'вул. Боберського',                     lat:49.8318000,lon:24.0080000,s:0,  sec:'6'},
-  // === СЕКТОР 7 (15) ===
-  {id:'p79', n:'вул. Коперника',                       lat:49.8364623,lon:24.0232407,s:13, sec:'7'},
-  {id:'p80', n:'вул. Словацького',                     lat:49.8388219,lon:24.0226587,s:31, sec:'7'},
-  {id:'p81', n:'вул. В. Стефаника',                    lat:49.8369839,lon:24.0253216,s:11, sec:'7'},
-  {id:'p82', n:'вул. Б. Лепкого',                      lat:49.8425182,lon:24.0202651,s:16, sec:'7'},
-  {id:'p83', n:'вул. І. Огієнка',                      lat:49.8415683,lon:24.0189007,s:13, sec:'7'},
-  {id:'p84', n:'вул. С. Крушельницької',               lat:49.8367358,lon:24.0197468,s:32, sec:'7'},
-  {id:'p85', n:'вул. Дорошенка',                       lat:49.8371346,lon:24.0216522,s:15, sec:'7'},
-  {id:'p86', n:'вул. Я. Матейка, 5',                   lat:49.8371178,lon:24.0177319,s:6,  sec:'7'},
-  {id:'p87', n:'вул. Листопадового Чину',              lat:49.8383688,lon:24.0165472,s:6,  sec:'7'},
-  {id:'p88', n:'вул. М. Щепкіна',                      lat:49.8411069,lon:24.0197165,s:5,  sec:'7'},
-  {id:'p89', n:'вул. Гоголя',                          lat:49.8404285,lon:24.0175785,s:17, sec:'7'},
-  {id:'p90', n:'вул. І. Вакарчука',                    lat:49.8367481,lon:24.0173475,s:13, sec:'7'},
-  {id:'p91', n:'вул. Озаркевича',                      lat:49.8384103,lon:24.0115997,s:24, sec:'7'},
-  {id:'p92', n:'вул. Устияновича',                     lat:49.8362993,lon:24.0161287,s:5,  sec:'7'},
-  {id:'p93', n:'вул. Меретина',                        lat:49.8377055,lon:24.0075638,s:0,  sec:'7'},
-  // === СЕКТОР 8 (16) ===
-  {id:'p94', n:'вул. М. Скорика',                      lat:49.8372258,lon:24.0290079,s:27, sec:'8'},
-  {id:'p95', n:'пл. Маланюка',                         lat:49.8379397,lon:24.0308245,s:13, sec:'8'},
-  {id:'p96', n:'пр. Шевченка',                         lat:49.8383119,lon:24.0310749,s:72, sec:'8'},
-  {id:'p97', n:'вул. Кн. Романа',                      lat:49.8372840,lon:24.0334192,s:11, sec:'8'},
-  {id:'p98', n:'вул. А. Волошина',                     lat:49.8364380,lon:24.0311340,s:13, sec:'8'},
-  {id:'p99', n:'вул. І. Григоровича',                  lat:49.8356972,lon:24.0306189,s:12, sec:'8'},
-  {id:'p100',n:'вул. І. Білозіра',                     lat:49.8357250,lon:24.0328861,s:17, sec:'8'},
-  {id:'p101',n:'вул. О. Фредра',                       lat:49.8365680,lon:24.0336092,s:13, sec:'8'},
-  {id:'p102',n:'вул. П. Ковжуна',                      lat:49.8368749,lon:24.0302520,s:19, sec:'8'},
-  {id:'p103',n:'вул. Я. Стецька',                      lat:49.8354106,lon:24.0335178,s:15, sec:'8'},
-  {id:'p104',n:'вул. М. Грушевського',                 lat:49.8348979,lon:24.0319578,s:19, sec:'8'},
-  {id:'p105',n:'вул. С. Томашівського',                lat:49.8367042,lon:24.0285441,s:8,  sec:'8'},
-  {id:'p106',n:'вул. М. Драгоманова',                  lat:49.8348849,lon:24.0314465,s:15, sec:'8'},
-  {id:'p107',n:'вул. П. Саксаганського',               lat:49.8346525,lon:24.0333950,s:19, sec:'8'},
-  {id:'p108',n:'вул. Дж. Дудаєва',                     lat:49.8360644,lon:24.0289141,s:19, sec:'8'},
-  {id:'p109',n:'вул. Стефаника (Скорика-Дудаєва)',     lat:49.8360901,lon:24.0279647,s:11, sec:'8'},
-  // === СЕКТОР 9 (18) ===
-  {id:'p110',n:'вул. Пекарська',                       lat:49.8379313,lon:24.0370941,s:25, sec:'9'},
-  {id:'p111',n:'вул. І. Дашка',                        lat:49.8390414,lon:24.0393407,s:14, sec:'9'},
-  {id:'p112',n:'вул. Кониського',                      lat:49.8388000,lon:24.0408000,s:0,  sec:'9'},
-  {id:'p113',n:'вул. К. Левицького',                   lat:49.8356706,lon:24.0370969,s:67, sec:'9'},
-  {id:'p114',n:'вул. Пекарська-Шімзерів',              lat:49.8361442,lon:24.0469539,s:25, sec:'9'},
-  {id:'p115',n:'вул. Патр. Д. Яреми',                  lat:49.8387488,lon:24.0420872,s:13, sec:'9'},
-  {id:'p116',n:'вул. Вагилевича',                      lat:49.8333906,lon:24.0411141,s:8,  sec:'9'},
-  {id:'p117',n:'вул. М. Туган-Барановського',          lat:49.8373536,lon:24.0385446,s:27, sec:'9'},
-  {id:'p118',n:'вул. Водогінна',                       lat:49.8278603,lon:24.0446132,s:14, sec:'9'},
-  {id:'p119',n:'вул. Ю. Дороша',                       lat:49.8334716,lon:24.0400195,s:15, sec:'9'},
-  {id:'p120',n:'вул. Ю. Руфа',                         lat:49.8382456,lon:24.0500607,s:30, sec:'9'},
-  {id:'p121',n:'вул. М. Костомарова',                  lat:49.8321469,lon:24.0345771,s:10, sec:'9'},
-  {id:'p122',n:'вул. Студентська',                     lat:49.8297553,lon:24.0468496,s:20, sec:'9'},
-  {id:'p123',n:'вул. Дніпровська',                     lat:49.8311189,lon:24.0452240,s:15, sec:'9'},
-  {id:'p124',n:'вул. В. Івасюка',                      lat:49.8307175,lon:24.0468113,s:23, sec:'9'},
-  {id:'p125',n:'вул. Тершаковців',                     lat:49.8358163,lon:24.0414109,s:59, sec:'9'},
-  {id:'p126',n:'вул. Кармалюка',                       lat:49.8400837,lon:24.0488148,s:0,  sec:'9'},
-  {id:'p127',n:'вул. Зелена, 30-64',                   lat:49.8343033,lon:24.0359631,s:0,  sec:'9'},
-  // === СЕКТОР 10 (11) ===
-  {id:'p128',n:'вул. Зарицьких',                       lat:49.8291776,lon:24.0259277,s:53, sec:'10'},
-  {id:'p129',n:'вул. М. Коцюбинського',                lat:49.8300665,lon:24.0299238,s:14, sec:'10'},
-  {id:'p130',n:'вул. Кирила і Мефодія',                lat:49.8321414,lon:24.0307690,s:6,  sec:'10'},
-  {id:'p131',n:'вул. А. Волощака',                     lat:49.8294652,lon:24.0304201,s:0,  sec:'10'},
-  {id:'p132',n:'вул. І. Франка, 66',                   lat:49.8304540,lon:24.0316212,s:4,  sec:'10'},
-  {id:'p133',n:'вул. Гладишевського',                  lat:49.8308332,lon:24.0306417,s:21, sec:'10'},
-  {id:'p134',n:'вул. Снопківська',                     lat:49.8265389,lon:24.0360074,s:43, sec:'10'},
-  {id:'p135',n:'вул. Кобилянської',                    lat:49.8313889,lon:24.0316427,s:9,  sec:'10'},
-  {id:'p136',n:'вул. Турецька',                        lat:49.8292133,lon:24.0293932,s:6,  sec:'10'},
-  {id:'p137',n:'вул. І. Франка (від УКУ)',              lat:49.8304540,lon:24.0316212,s:4,  sec:'10'},
-  {id:'p138',n:'вул. Віденська',                       lat:49.8280000,lon:24.0330000,s:0,  sec:'10'},
-// === СЕКТОР 11 (11) ===
-{id:'p139',n:'вул. Кн. Ольги, 108',                  lat:49.8070000,lon:24.0290000,s:0, sec:'11'},
+  {id:'p1',  n:'вул. Клепарівська',           lat:49.8466561,lon:24.0159639,s:31, sec:'1'},
+  {id:'p2',  n:'вул. Академіка Р. Кучера',    lat:49.8440255,lon:24.0197545,s:9,  sec:'1'},
+  {id:'p3',  n:'вул. Т. Шевченка',            lat:49.8431290,lon:24.0151065,s:33, sec:'1'},
+  {id:'p4',  n:'вул. Вільна',                 lat:49.8442785,lon:24.0163554,s:9,  sec:'1'},
+  {id:'p5',  n:'вул. Братів Міхновських',     lat:49.8382797,lon:24.0042899,s:45, sec:'1'},
+  {id:'p6',  n:'вул. Яцкова',                 lat:49.8484102,lon:24.0051389,s:22, sec:'1'},
+  {id:'p7',  n:'вул. Турянського',            lat:49.8488002,lon:24.0031656,s:15, sec:'1'},
+  {id:'p8',  n:'вул. Сембратовичів',          lat:49.8394358,lon:24.0067772,s:0,  sec:'1'},
+  {id:'p9',  n:'вул. Я. Раппапорта',          lat:49.8449270,lon:24.0197226,s:31, sec:'1'},
+  {id:'p10', n:'вул. Вагова',                 lat:49.8452178,lon:24.0248378,s:11, sec:'2'},
+  {id:'p11', n:'вул. Сянська',                lat:49.8460835,lon:24.0280956,s:13, sec:'2'},
+  {id:'p12', n:'вул. Лазнева',                lat:49.8455604,lon:24.0263583,s:5,  sec:'2'},
+  {id:'p13', n:'вул. Данилишина',             lat:49.8440776,lon:24.0228989,s:5,  sec:'2'},
+  {id:'p14', n:'вул. Шпитальна (Магнус)',     lat:49.8447421,lon:24.0232634,s:18, sec:'2'},
+  {id:'p15', n:'вул. Джерельна',              lat:49.8495823,lon:24.0202760,s:38, sec:'2'},
+  {id:'p16', n:'вул. Шпитальна',              lat:49.8447421,lon:24.0232634,s:18, sec:'2'},
+  {id:'p17', n:'вул. Крехівська',             lat:49.8474887,lon:24.0201359,s:9,  sec:'2'},
+  {id:'p18', n:'вул. Під Дубом',              lat:49.8504524,lon:24.0250813,s:28, sec:'2'},
+  {id:'p19', n:'вул. Шолом Алейхема',         lat:49.8448202,lon:24.0202600,s:19, sec:'2'},
+  {id:'p20', n:'вул. Котлярська',             lat:49.8455179,lon:24.0228364,s:14, sec:'2'},
+  {id:'p21', n:'пл. Святого Теодора',         lat:49.8471964,lon:24.0271171,s:19, sec:'2'},
+  {id:'p22', n:'вул. Академіка Люльки',       lat:49.8488074,lon:24.0255765,s:9,  sec:'2'},
+  {id:'p23', n:'пр. Чорновола, 65',           lat:49.8590775,lon:24.0200619,s:37, sec:'2'},
+  {id:'p24', n:'пр. Чорновола, 45',           lat:49.8552175,lon:24.0220075,s:0,  sec:'2'},
+  {id:'p25', n:'вул. Пильникарська',          lat:49.8469085,lon:24.0296725,s:11, sec:'5'},
+  {id:'p26', n:'вул. Долинського',            lat:49.8509631,lon:24.0268136,s:18, sec:'5'},
+  {id:'p27', n:'вул. Хімічна',               lat:49.8540139,lon:24.0239991,s:18, sec:'5'},
+  {id:'p28', n:'вул. Замарстинівська',        lat:49.8538099,lon:24.0283650,s:26, sec:'5'},
+  {id:'p29', n:'вул. Пилипа Орлика',          lat:49.8739881,lon:24.0331602,s:0,  sec:'5'},
+  {id:'p30', n:'вул. І. Мазепи, 25',          lat:49.8727169,lon:24.0405609,s:0,  sec:'5'},
+  {id:'p31', n:'вул. С. Бандери',             lat:49.8346442,lon:24.0144984,s:63, sec:'6'},
+  {id:'p32', n:'вул. Політехнічна',           lat:49.8340527,lon:24.0144756,s:8,  sec:'6'},
+  {id:'p33', n:'вул. Русових',               lat:49.8342375,lon:24.0075493,s:7,  sec:'6'},
+  {id:'p34', n:'вул. І. Тобілевича',          lat:49.8365221,lon:24.0026944,s:22, sec:'6'},
+  {id:'p35', n:'вул. А. Горської',            lat:49.8358233,lon:24.0012772,s:18, sec:'6'},
+  {id:'p36', n:'вул. Архітекторська',         lat:49.8352869,lon:24.0128827,s:12, sec:'6'},
+  {id:'p37', n:'вул. Старосольських',         lat:49.8353193,lon:24.0114878,s:15, sec:'6'},
+  {id:'p38', n:'вул. Нечуя-Левицького',       lat:49.8327768,lon:24.0163568,s:9,  sec:'6'},
+  {id:'p39', n:'вул. М. Вербицького',         lat:49.8338377,lon:24.0178330,s:0,  sec:'6'},
+  {id:'p40', n:'вул. Київська',               lat:49.8330907,lon:24.0095040,s:18, sec:'6'},
+  {id:'p41', n:'вул. Ю. Федьковича',          lat:49.8348330,lon:24.0020627,s:36, sec:'6'},
+  {id:'p42', n:'вул. Академіка Єфремова',     lat:49.8340656,lon:24.0109304,s:24, sec:'6'},
+  {id:'p43', n:'вул. Є. Коновальця',          lat:49.8343641,lon:24.0091786,s:11, sec:'6'},
+  {id:'p44', n:'вул. І. Калинець',            lat:49.8342812,lon:24.0182626,s:11, sec:'6'},
+  {id:'p45', n:'вул. Японська',               lat:49.8334102,lon:24.0116036,s:24, sec:'6'},
+  {id:'p46', n:'вул. І. Богуна',              lat:49.8332718,lon:24.0144032,s:15, sec:'6'},
+  {id:'p47', n:'вул. Глибока',               lat:49.8342625,lon:24.0132819,s:15, sec:'6'},
+  {id:'p48', n:'вул. Новий Світ',             lat:49.8336059,lon:24.0125931,s:31, sec:'6'},
+  {id:'p49', n:'вул. Здоров\'я',              lat:49.8325523,lon:24.0104917,s:6,  sec:'6'},
+  {id:'p50', n:'вул. Коперника',              lat:49.8364623,lon:24.0232407,s:13, sec:'7'},
+  {id:'p51', n:'вул. Словацького',            lat:49.8388219,lon:24.0226587,s:31, sec:'7'},
+  {id:'p52', n:'вул. Б. Лепкого',             lat:49.8425182,lon:24.0202651,s:16, sec:'7'},
+  {id:'p53', n:'вул. І. Огієнка',             lat:49.8415683,lon:24.0189007,s:13, sec:'7'},
+  {id:'p54', n:'вул. С. Крушельницької',      lat:49.8367358,lon:24.0197468,s:32, sec:'7'},
+  {id:'p55', n:'вул. Дорошенка',              lat:49.8371346,lon:24.0216522,s:15, sec:'7'},
+  {id:'p56', n:'вул. Листопадового Чину',     lat:49.8371178,lon:24.0177319,s:6,  sec:'7'},
+  {id:'p57', n:'вул. М. Щепкіна',             lat:49.8411069,lon:24.0197165,s:5,  sec:'7'},
+  {id:'p58', n:'вул. Гоголя',                 lat:49.8404285,lon:24.0175785,s:17, sec:'7'},
+  {id:'p59', n:'вул. І. Вакарчука',           lat:49.8367481,lon:24.0173475,s:13, sec:'7'},
+  {id:'p60', n:'вул. Озаркевича',             lat:49.8384103,lon:24.0115997,s:24, sec:'7'},
+  {id:'p61', n:'вул. Устияновича',            lat:49.8362993,lon:24.0161287,s:5,  sec:'7'},
+  {id:'p62', n:'вул. Меретина',               lat:49.8377055,lon:24.0075638,s:0,  sec:'7'},
+  {id:'p63', n:'вул. М. Скорика',             lat:49.8372258,lon:24.0290079,s:27, sec:'8'},
+  {id:'p64', n:'пл. Маланюка',               lat:49.8379397,lon:24.0308245,s:13, sec:'8'},
+  {id:'p65', n:'пр. Шевченка',               lat:49.8383119,lon:24.0310749,s:72, sec:'8'},
+  {id:'p66', n:'вул. Кн. Романа',             lat:49.8372840,lon:24.0334192,s:11, sec:'8'},
+  {id:'p67', n:'вул. А. Волошина',            lat:49.8364380,lon:24.0311340,s:13, sec:'8'},
+  {id:'p68', n:'вул. І. Григоровича',         lat:49.8356972,lon:24.0306189,s:12, sec:'8'},
+  {id:'p69', n:'вул. І. Білозіра',            lat:49.8357250,lon:24.0328861,s:17, sec:'8'},
+  {id:'p70', n:'вул. О. Фредра',              lat:49.8365680,lon:24.0336092,s:13, sec:'8'},
+  {id:'p71', n:'вул. П. Ковжуна',             lat:49.8368749,lon:24.0302520,s:19, sec:'8'},
+  {id:'p72', n:'вул. Я. Стецька',             lat:49.8354106,lon:24.0335178,s:15, sec:'8'},
+  {id:'p73', n:'вул. М. Грушевського',        lat:49.8348979,lon:24.0319578,s:19, sec:'8'},
+  {id:'p74', n:'вул. С. Томашівського',       lat:49.8367042,lon:24.0285441,s:8,  sec:'8'},
+  {id:'p75', n:'вул. М. Драгоманова',         lat:49.8348849,lon:24.0314465,s:15, sec:'8'},
+  {id:'p76', n:'вул. П. Саксаганського',      lat:49.8346525,lon:24.0333950,s:19, sec:'8'},
+  {id:'p77', n:'вул. Дж. Дудаєва',            lat:49.8360644,lon:24.0289141,s:19, sec:'8'},
+  {id:'p78', n:'вул. Стефаника (Скорика-Дудаєва)', lat:49.8369839,lon:24.0253216,s:11, sec:'8'},
+  {id:'p79', n:'вул. Пекарська',              lat:49.8379313,lon:24.0370941,s:25, sec:'9'},
+  {id:'p80', n:'вул. І. Дашка',               lat:49.8390414,lon:24.0393407,s:14, sec:'9'},
+  {id:'p81', n:'вул. К. Левицького',          lat:49.8356706,lon:24.0370969,s:67, sec:'9'},
+  {id:'p82', n:'вул. Пекарська-Шімзерів',     lat:49.8361442,lon:24.0469539,s:25, sec:'9'},
+  {id:'p83', n:'вул. Патр. Д. Яреми',         lat:49.8387488,lon:24.0420872,s:13, sec:'9'},
+  {id:'p84', n:'вул. Вагилевича',             lat:49.8333906,lon:24.0411141,s:8,  sec:'9'},
+  {id:'p85', n:'вул. М. Туган-Барановського', lat:49.8373536,lon:24.0385446,s:27, sec:'9'},
+  {id:'p86', n:'вул. Водогінна',              lat:49.8278603,lon:24.0446132,s:14, sec:'9'},
+  {id:'p87', n:'вул. Ю. Дороша',              lat:49.8334716,lon:24.0400195,s:15, sec:'9'},
+  {id:'p88', n:'вул. Ю. Руфа',                lat:49.8382456,lon:24.0500607,s:30, sec:'9'},
+  {id:'p89', n:'вул. М. Костомарова',         lat:49.8321469,lon:24.0345771,s:10, sec:'9'},
+  {id:'p90', n:'вул. Студентська',            lat:49.8297553,lon:24.0468496,s:20, sec:'9'},
+  {id:'p91', n:'вул. Дніпровська',            lat:49.8311189,lon:24.0452240,s:15, sec:'9'},
+  {id:'p92', n:'вул. В. Івасюка',             lat:49.8307175,lon:24.0468113,s:23, sec:'9'},
+  {id:'p93', n:'вул. Тершаковців',            lat:49.8358163,lon:24.0414109,s:59, sec:'9'},
+  {id:'p94', n:'вул. Кармалюка',              lat:49.8400837,lon:24.0488148,s:0,  sec:'9'},
+  {id:'p95', n:'вул. Зарицьких',              lat:49.8291776,lon:24.0259277,s:53, sec:'10'},
+  {id:'p96', n:'вул. М. Коцюбинського',       lat:49.8300665,lon:24.0299238,s:14, sec:'10'},
+  {id:'p97', n:'вул. Кирила і Мефодія',       lat:49.8321414,lon:24.0307690,s:6,  sec:'10'},
+  {id:'p98', n:'вул. І. Франка, 66',          lat:49.8304540,lon:24.0316212,s:4,  sec:'10'},
+  {id:'p99', n:'вул. Гладишевського',         lat:49.8308332,lon:24.0306417,s:21, sec:'10'},
+  {id:'p100',n:'вул. Снопківська',            lat:49.8265389,lon:24.0360074,s:43, sec:'10'},
+  {id:'p101',n:'вул. Кобилянської',           lat:49.8313889,lon:24.0316427,s:9,  sec:'10'},
+  {id:'p102',n:'вул. Турецька',               lat:49.8292133,lon:24.0293932,s:6,  sec:'10'},
+  {id:'p103',n:'вул. І. Франка (від УКУ)',     lat:49.8304540,lon:24.0316212,s:4,  sec:'10'},
+  {id:'p104',n:'вул. Підвальна',              lat:49.8418114,lon:24.0350976,s:15, sec:'4'},
+  {id:'p105',n:'пл. Міцкевича',              lat:49.8391168,lon:24.0306216,s:17, sec:'4'},
+  {id:'p106',n:'вул. С. Гавришкевича',        lat:49.8441927,lon:24.0299007,s:24, sec:'4'},
+  {id:'p107',n:'вул. Кн. Я. Осмомисла',       lat:49.8443361,lon:24.0291036,s:5,  sec:'4'},
+  {id:'p108',n:'вул. Просвіти',               lat:49.8420296,lon:24.0382373,s:31, sec:'4'},
+  {id:'p109',n:'вул. М. Лисенка',             lat:49.8430633,lon:24.0367331,s:12, sec:'4'},
+  {id:'p110',n:'вул. В. Винниченка',          lat:49.8421651,lon:24.0363730,s:24, sec:'4'},
+  {id:'p111',n:'вул. Т. Бобанича',            lat:49.8402450,lon:24.0390818,s:14, sec:'4'},
+  {id:'p112',n:'вул. Гуцульська',             lat:49.8439301,lon:24.0386817,s:0,  sec:'4'},
+  {id:'p113',n:'вул. Личачівська',            lat:49.8400837,lon:24.0488148,s:0,  sec:'4'},
+  {id:'p114',n:'вул. Кривоноса, 41',          lat:49.8473661,lon:24.0405441,s:5,  sec:'4'},
+  {id:'p121',n:'вул. Винниченка, 32',          lat:49.8448599,lon:24.0359406,s:0,  sec:'4'},
+  {id:'p122',n:'вул. Винниченка, 16',          lat:49.8421651,lon:24.0363730,s:0,  sec:'4'},
+  {id:'p123',n:'вул. В. Стефаника',            lat:49.8369839,lon:24.0253216,s:11, sec:'7'},
+  {id:'p124',n:'вул. Я. Матейка, 5',           lat:49.8371178,lon:24.0177319,s:6,  sec:'7'},
+  {id:'p115',n:'вул. Костюшка',               lat:49.8397183,lon:24.0244638,s:20, sec:'3'},
+  {id:'p116',n:'вул. Січових Стрільців',      lat:49.8402714,lon:24.0241894,s:11, sec:'3'},
+  {id:'p117',n:'вул. С. Наливайка',           lat:49.8432926,lon:24.0234340,s:19, sec:'3'},
+  {id:'p118',n:'вул. М. Менцинського',        lat:49.8419836,lon:24.0221894,s:11, sec:'3'},
+  {id:'p119',n:'вул. Гребінки',               lat:49.8417444,lon:24.0205019,s:12, sec:'3'},
+  {id:'p120',n:'вул. Гнатюка',               lat:49.8417631,lon:24.0244834,s:22, sec:'3'},
+  // === СЕКТОР 11 (11) ===
+  // --- С2 бракує 5 ---
+  {id:'p150',n:'вул. М. Балабана',                     lat:49.8453200,lon:24.0215000,s:0,  sec:'2'},
+  {id:'p151',n:'вул. Газова',                          lat:49.8461000,lon:24.0243000,s:0,  sec:'2'},
+  {id:'p152',n:'вул. Куліша',                          lat:49.8458000,lon:24.0237000,s:0,  sec:'2'},
+  {id:'p153',n:'вул. Медова',                          lat:49.8456000,lon:24.0252000,s:0,  sec:'2'},
+  {id:'p154',n:'вул. Таманська',                       lat:49.8464000,lon:24.0270000,s:0,  sec:'2'},
+  // --- С4 бракує 1 ---
+  {id:'p155',n:'вул. Чернеча Гора, 1',                 lat:49.8378000,lon:24.0540000,s:0,  sec:'4'},
+  // --- С6 бракує 4 ---
+  {id:'p156',n:'вул. Липнева',                         lat:49.8316632,lon:24.0065834,s:0,  sec:'6'},
+  {id:'p157',n:'вул. Смаль-Стоцького',                 lat:49.8322000,lon:24.0058000,s:0,  sec:'6'},
+  {id:'p158',n:'вул. Боберського',                     lat:49.8318000,lon:24.0080000,s:0,  sec:'6'},
+  {id:'p159',n:'вул. А. Горської',                     lat:49.8358233,lon:24.0012772,s:16, sec:'6'},
+  // --- С9 бракує 2 ---
+  {id:'p160',n:'вул. Кониського',                      lat:49.8388000,lon:24.0408000,s:0,  sec:'9'},
+  {id:'p161',n:'вул. Зелена, 30-64',                   lat:49.8343033,lon:24.0359631,s:0,  sec:'9'},
+  // --- С10 бракує 2 ---
+  {id:'p162',n:'вул. А. Волощака',                     lat:49.8294652,lon:24.0304201,s:9,  sec:'10'},
+  {id:'p163',n:'вул. Віденська',                       lat:49.8280000,lon:24.0330000,s:0,  sec:'10'},
+  // === СЕКТОР 11 (11) ===
+  {id:'p139',n:'вул. Кн. Ольги, 108',                  lat:49.8070000,lon:24.0290000,s:0, sec:'11'},
   {id:'p140',n:'вул. Кн. Ольги, 114',                  lat:49.8063000,lon:24.0295000,s:0, sec:'11'},
   {id:'p141',n:'вул. Кн. Ольги, 114 Аквапарк',         lat:49.8062000,lon:24.0298000,s:0, sec:'11'},
   {id:'p142',n:'вул. Володимира Великого, 27',          lat:49.8090000,lon:24.0325000,s:0, sec:'11'},
@@ -500,13 +687,15 @@ function drawRouteLines() {
 function adjustMapBottom() {
   const h = document.getElementById('bottom').offsetHeight;
   document.getElementById('map').style.bottom = h + 'px';
-  document.getElementById('fab-gps').style.bottom = h + 10 + 'px';
+  document.getElementById('fab-gps').style.bottom  = h + 10 + 'px';
+  document.getElementById('fab-pdr').style.bottom  = h + 70 + 'px';
+  document.getElementById('fab-rent').style.bottom = h + 130 + 'px';
   map.invalidateSize();
 }
 
 function goTab(name) {
   document.querySelectorAll('.tab').forEach((t,i) =>
-    t.classList.toggle('on', ['sector','route','timer','gps'][i] === name));
+    t.classList.toggle('on', ['sector','route'][i] === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
   document.getElementById('p-'+name).classList.add('on');
   document.getElementById('nav-bar').classList.toggle('show', name==='route' && steps.length>0);
@@ -526,6 +715,7 @@ function renderSecGrid() {
 function setSec(s) {
   ST.sec = s; ST.skip = []; save();
   renderSecGrid(); renderPkList(); renderPkMarkers();
+  renderPdrMapMarkers(); // оновлюємо ПДР маркери для нового сектору
   steps = []; cur = 0;
   document.getElementById('nav-bar').classList.remove('show');
   document.getElementById('route-list').innerHTML = '';
@@ -575,50 +765,172 @@ function buildRoute() {
   const active = PARKS.filter(p => p.sec===ST.sec && !ST.skip.includes(p.id));
   if (!active.length) { alert('Немає активних парковок.'); return; }
 
-  // Кластеризація
-  const used = new Set(), clusters = [];
-  [...active].sort((a,b)=>b.s-a.s).forEach(p => {
-    if (used.has(p.id)) return;
-    const cl = [p]; used.add(p.id);
-    active.forEach(q => { if (!used.has(q.id) && dm(p.lat,p.lon,q.lat,q.lon)<=PAIR_R) { cl.push(q); used.add(q.id); }});
-    clusters.push(cl);
+  const SHIFT = 240; // хвилин зміни
+  const CORE_R = 350; // радіус ядра (м)
+  const MIN_INTERVAL = 12; // мін. хвилин між двома відвідуваннями однієї парковки
+
+  // === 1. ЗНАЙТИ ЯДРО ===
+  // Для кожної парковки — рахуємо сумарну кількість місць в радіусі CORE_R
+  // Ядро = група навколо парковки з найбільшою щільністю місць
+  let bestCore = [], bestScore = -1;
+  active.forEach(center => {
+    const group = active.filter(q => dm(center.lat,center.lon,q.lat,q.lon) <= CORE_R);
+    const score = group.reduce((s,p) => s + (p.s||5), 0);
+    if (score > bestScore) { bestScore = score; bestCore = group; }
   });
 
-  // Nearest neighbor
-  const ord = [], cu = new Set();
-  let st = clusters.reduce((a,b) => b.reduce((s,p)=>s+p.s,0)>a.reduce((s,p)=>s+p.s,0)?b:a);
-  ord.push(st); cu.add(clusters.indexOf(st));
-  while (ord.length < clusters.length) {
-    const lc = cc(ord[ord.length-1]); let bi=-1, bd=Infinity;
-    clusters.forEach((cl,i) => { if(cu.has(i))return; const c=cc(cl),d=dm(lc[0],lc[1],c[0],c[1]); if(d<bd){bd=d;bi=i;} });
-    ord.push(clusters[bi]); cu.add(bi);
+  // Периферія — парковки поза ядром
+  const coreIds = new Set(bestCore.map(p=>p.id));
+  const periphery = active.filter(p => !coreIds.has(p.id));
+
+  // === 2. ВПОРЯДКУВАТИ ЯДРО ПО КОЛУ (nearest neighbor) ===
+  const sortedCore = [];
+  const coreLeft = [...bestCore].sort((a,b)=>(b.s||0)-(a.s||0));
+  const visited = new Set();
+  // Старт — парковка з найбільшою кількістю місць
+  let curr = coreLeft[0];
+  sortedCore.push(curr); visited.add(curr.id);
+  while (sortedCore.length < bestCore.length) {
+    let best = null, bd = Infinity;
+    bestCore.forEach(p => {
+      if (visited.has(p.id)) return;
+      const d = dm(curr.lat,curr.lon,p.lat,p.lon);
+      if (d < bd) { bd=d; best=p; }
+    });
+    sortedCore.push(best); visited.add(best.id); curr = best;
   }
 
-  // Генерація кроків
-  steps = []; let t = 0;
-  ord.forEach((cl, ci) => {
-    if (ci > 0) {
-      const d = dm(...cc(ord[ci-1]), ...cc(cl));
-      const vel = d > BIKE_T;
-      t += vel ? bm(d) : wm(d);
-      steps.push({type: vel?'vel':'walk', name: vel?'🚲 Їдеш велосипедом':'🚶 Йдеш пішки', sub: fm(d), lat:cc(cl)[0], lon:cc(cl)[1], eta:t});
-    }
-    cl.forEach((p, pi) => {
-      if (pi > 0) t += wm(dm(cl[pi-1].lat,cl[pi-1].lon,p.lat,p.lon));
-      steps.push({type:'fik', name:p.n, sub:`${p.s||'?'} місць · ФІКСАЦІЯ`, lat:p.lat, lon:p.lon, eta:t});
-    });
-    t += WAIT;
-    steps.push({type:'wait', name:'Чекаєш 10 хв', sub:'Запусти таймер', lat:cc(cl)[0], lon:cc(cl)[1], eta:t});
-    [...cl].reverse().forEach((p, pi, arr) => {
-      if (pi > 0) t += wm(dm(arr[pi-1].lat,arr[pi-1].lon,p.lat,p.lon));
-      steps.push({type:'sht', name:p.n, sub:'ШТРАФ', lat:p.lat, lon:p.lon, eta:t});
-    });
+  // === 3. РОЗРАХУВАТИ ЧАС ОДНОГО КОЛА ===
+  let cycleTime = 0;
+  sortedCore.forEach((p,i) => {
+    if (i > 0) cycleTime += wm(dm(sortedCore[i-1].lat,sortedCore[i-1].lon,p.lat,p.lon));
+  });
+  // Повернення до початку
+  cycleTime += wm(dm(sortedCore[sortedCore.length-1].lat,sortedCore[sortedCore.length-1].lon,
+                     sortedCore[0].lat,sortedCore[0].lon));
+
+  // Скільки циклів влізає в зміну (мін. інтервал між відвідуваннями)
+  const effectiveCycleTime = Math.max(cycleTime, MIN_INTERVAL);
+  const totalCycles = Math.floor(SHIFT / effectiveCycleTime);
+
+  // === 4. ГЕНЕРАЦІЯ КРОКІВ ===
+  steps = [];
+  let t = 0;
+
+  // Заголовок — ядро
+  steps.push({
+    type:'info',
+    name:`Ядро патрулювання — ${bestCore.length} парковок`,
+    sub:`${bestScore} місць · цикл ~${Math.round(cycleTime)} хв · ~${totalCycles} кіл за зміну`,
+    lat: bestCore[0].lat, lon: bestCore[0].lon, eta:0
   });
 
+  // 3 повних цикли для наочності, потім "і так далі"
+  const SHOW_CYCLES = Math.min(3, totalCycles);
+
+  for (let cycle = 0; cycle < SHOW_CYCLES; cycle++) {
+    // Заголовок циклу
+    steps.push({
+      type:'cycle',
+      name:`Коло ${cycle+1} з ~${totalCycles}`,
+      sub: cycle===0 ? 'Старт патрулювання' : `+${Math.round(t)} хв від початку`,
+      lat: sortedCore[0].lat, lon: sortedCore[0].lon, eta:t
+    });
+
+    // Фіксація по всіх парковках ядра
+    sortedCore.forEach((p, pi) => {
+      if (pi > 0) {
+        const d = dm(sortedCore[pi-1].lat,sortedCore[pi-1].lon,p.lat,p.lon);
+        t += wm(d);
+        steps.push({type:'walk', name:'🚶 Йдеш пішки', sub:fm(d), lat:p.lat, lon:p.lon, eta:t});
+      }
+      steps.push({type:'fik', name:p.n, sub:`${p.s||'?'} місць · ФІКСАЦІЯ`, lat:p.lat, lon:p.lon, eta:t});
+    });
+
+    // Штраф — повертаємось назад по колу (до парковок де вже пройшло >10 хв)
+    // Рухаємось до наступної парковки і по дорозі виписуємо штрафи
+    sortedCore.forEach((p, pi) => {
+      // Перевіряємо чи минуло достатньо часу (10 хв = пройшли хоча б 2+ парковок вперед)
+      const walkedAhead = pi < sortedCore.length - 1;
+      if (pi > 0) {
+        const d = dm(sortedCore[pi === 0 ? sortedCore.length-1 : pi-1].lat,
+                     sortedCore[pi === 0 ? sortedCore.length-1 : pi-1].lon,
+                     p.lat, p.lon);
+        if (cycle > 0 || pi > Math.floor(sortedCore.length/2)) {
+          // Після першого кола або другої половини — виписуємо штрафи
+          steps.push({type:'sht', name:p.n, sub:'ШТРАФ', lat:p.lat, lon:p.lon, eta:t});
+        }
+      }
+    });
+
+    // Повернення до початку кола
+    const lastP = sortedCore[sortedCore.length-1];
+    const firstP = sortedCore[0];
+    const returnD = dm(lastP.lat,lastP.lon,firstP.lat,firstP.lon);
+    t += wm(returnD);
+    steps.push({type:'walk', name:'🔄 Повернення до початку', sub:fm(returnD), lat:firstP.lat, lon:firstP.lon, eta:t});
+  }
+
+  if (totalCycles > SHOW_CYCLES) {
+    steps.push({
+      type:'info',
+      name:`↻ Повторювати до кінця зміни`,
+      sub:`Ще ~${totalCycles - SHOW_CYCLES} кіл · залишок ~${Math.round(SHIFT - t)} хв`,
+      lat: sortedCore[0].lat, lon: sortedCore[0].lon, eta:t
+    });
+  }
+
+  // === 5. ПЕРИФЕРІЯ ===
+  if (periphery.length > 0) {
+    steps.push({
+      type:'info',
+      name:`Периферія — ${periphery.length} парковок`,
+      sub:'Відвідати між циклами коли є час',
+      lat: periphery[0].lat, lon: periphery[0].lon, eta:t
+    });
+    // Сортуємо периферію nearest neighbor від ядра
+    const sortedPerif = [];
+    const perifLeft = [...periphery];
+    let perifCurr = {lat: bestCore[0].lat, lon: bestCore[0].lon};
+    while (perifLeft.length) {
+      let bi = 0, bd = Infinity;
+      perifLeft.forEach((p,i) => {
+        const d = dm(perifCurr.lat,perifCurr.lon,p.lat,p.lon);
+        if (d < bd) { bd=d; bi=i; }
+      });
+      sortedPerif.push(perifLeft[bi]);
+      perifCurr = perifLeft[bi];
+      perifLeft.splice(bi,1);
+    }
+    sortedPerif.forEach((p,pi) => {
+      if (pi > 0) {
+        const d = dm(sortedPerif[pi-1].lat,sortedPerif[pi-1].lon,p.lat,p.lon);
+        const vel = d > BIKE_T;
+        t += vel ? bm(d) : wm(d);
+        steps.push({type:vel?'vel':'walk', name:vel?'🚲 Їдеш велосипедом':'🚶 Йдеш пішки', sub:fm(d), lat:p.lat, lon:p.lon, eta:t});
+      }
+      steps.push({type:'fik', name:p.n, sub:`${p.s||'?'} місць · ФІКСАЦІЯ`, lat:p.lat, lon:p.lon, eta:t});
+      steps.push({type:'sht', name:p.n, sub:'ШТРАФ (через 10+ хв)', lat:p.lat, lon:p.lon, eta:t+WAIT});
+    });
+  }
+
+  // === 6. ПОТЕНЦІАЛ ===
+  const coreSpots = bestScore;
+  const fillRate = 0.6;   // ~60% заповненість
+  const fineRate = 0.25;  // ~25% порушників
+  const estFines = Math.round(totalCycles * sortedCore.length * fillRate * fineRate);
+  const cycleKm = (() => {
+    let d = 0;
+    sortedCore.forEach((p,i) => { if(i>0) d+=dm(sortedCore[i-1].lat,sortedCore[i-1].lon,p.lat,p.lon); });
+    d += dm(sortedCore[sortedCore.length-1].lat,sortedCore[sortedCore.length-1].lon,sortedCore[0].lat,sortedCore[0].lon);
+    return d/1000;
+  })();
+
   cur = 0;
-  const shts = steps.filter(s=>s.type==='sht').length;
-  document.getElementById('route-stats').textContent =
-    `${shts} потенційних штрафів · ${Math.round(t)} хв · ${clusters.length} кластерів`;
+  document.getElementById('route-stats').innerHTML =
+    `<b>Ядро:</b> ${bestCore.length} парковок · ${bestScore} місць · цикл ${Math.round(cycleTime)} хв · ${Math.round(cycleKm*10)/10} км<br>` +
+    `<b>Потенціал:</b> ~${totalCycles} кіл · ~${estFines} штрафів за зміну<br>` +
+    `<b>Периферія:</b> ${periphery.length} парковок (між циклами)`;
 
   renderSteps();
   updateTopbar(steps[0]);
@@ -628,11 +940,13 @@ function buildRoute() {
 }
 
 const BCFG = {
-  fik:  {bg:'#d29922', fg:'#000', lbl:'ФІК'},
-  sht:  {bg:'#3fb950', fg:'#000', lbl:'ШТР'},
-  vel:  {bg:'#8957e5', fg:'#fff', lbl:'ВЕЛ'},
-  walk: {bg:'#8957e5', fg:'#fff', lbl:'🚶'},
-  wait: {bg:'#30363d', fg:'#6e7681', lbl:'⏱'},
+  fik:   {bg:'#d29922', fg:'#000', lbl:'ФІК'},
+  sht:   {bg:'#3fb950', fg:'#000', lbl:'ШТР'},
+  vel:   {bg:'#8957e5', fg:'#fff', lbl:'ВЕЛ'},
+  walk:  {bg:'#8957e5', fg:'#fff', lbl:'🚶'},
+  wait:  {bg:'#30363d', fg:'#6e7681', lbl:'⏱'},
+  info:  {bg:'#1f6feb', fg:'#fff', lbl:'ℹ'},
+  cycle: {bg:'#0d1117', fg:'#58a6ff', lbl:'↻'},
 };
 
 function renderSteps() {
@@ -686,9 +1000,9 @@ function stepBack() { if (cur > 0) { cur--; updateStepUI(); } }
 function jumpTo(i)  { cur = i; updateStepUI(); }
 
 // ═══════════════════════════════════════
-// GPS
+// GPS (тільки FAB, без панелі)
 // ═══════════════════════════════════════
-let watching = false, watchId = null, curPos = null, lastAddr = 0;
+let watching = false, watchId = null, curPos = null;
 
 function toggleGPS() {
   watching ? stopGPS() : startGPS();
@@ -697,8 +1011,6 @@ function startGPS() {
   if (!navigator.geolocation) { alert('GPS недоступний'); return; }
   watching = true;
   document.getElementById('fab-gps').classList.add('on');
-  document.getElementById('btn-gps').classList.add('on');
-  document.getElementById('btn-gps').textContent = '📍 GPS увімкнено';
   watchId = navigator.geolocation.watchPosition(pos => {
     curPos = {lat: pos.coords.latitude, lon: pos.coords.longitude};
     if (!userMkr) {
@@ -706,69 +1018,605 @@ function startGPS() {
         html:'<div style="width:14px;height:14px;background:#1f6feb;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #1f6feb"></div>',
         iconSize:[14,14],iconAnchor:[7,7]}), zIndexOffset:1000}).addTo(map);
     } else userMkr.setLatLng([curPos.lat,curPos.lon]);
-    updateGpsPanel();
   }, ()=>{}, {enableHighAccuracy:true, maximumAge:3000});
 }
 function stopGPS() {
   watching = false;
   document.getElementById('fab-gps').classList.remove('on');
-  document.getElementById('btn-gps').classList.remove('on');
-  document.getElementById('btn-gps').textContent = '📍 Увімкнути GPS';
   if (watchId) { navigator.geolocation.clearWatch(watchId); watchId=null; }
 }
-function updateGpsPanel() {
-  if (!curPos) return;
-  const near = PARKS.map(p=>({...p,d:dm(curPos.lat,curPos.lon,p.lat,p.lon)})).sort((a,b)=>a.d-b.d)[0];
-  document.getElementById('gps-near').textContent = near.n;
-  document.getElementById('gps-meta').textContent = `Сектор ${near.sec}${near.s?` · ${near.s} місць`:''}`;
-  document.getElementById('gps-dist').textContent = fm(near.d);
-  const now = Date.now();
-  if (now - lastAddr > 30000) { lastAddr=now; fetchAddrs(curPos.lat,curPos.lon); }
+
+// ═══════════════════════════════════════
+// ПДР — ДАНІ
+// ═══════════════════════════════════════
+// Структура точки:
+// { id, type:'sign'|'marking', sign_type, address, lat, lon,
+//   action_start:{lat,lon,address}, action_end:{lat,lon,address}|null,
+//   duplicate:{lat,lon,address}|null, note, sec }
+let PDR_POINTS = [];
+try { PDR_POINTS = JSON.parse(localStorage.getItem('pdr_points')||'[]'); } catch(e) {}
+let pdrMapMarkers = [], pdrZoneLines = [];
+
+function savePDR() {
+  try { localStorage.setItem('pdr_points', JSON.stringify(PDR_POINTS)); } catch(e) {}
 }
-async function fetchAddrs(lat,lon) {
-  const R=.0008, b=`${lat-R},${lon-R},${lat+R},${lon+R}`;
-  const q=`[out:json][timeout:6];(node["addr:housenumber"](${b});way["addr:housenumber"](${b}););out center 20;`;
-  const el = document.getElementById('addr-list');
+
+const SIGN_TYPES = [
+  {v:'3.34',     l:'3.34 — Зупинка заборонена'},
+  {v:'3.35',     l:'3.35 — Стоянка заборонена'},
+  {v:'3.34+3.35',l:'3.34 + 3.35 — Зупинка і стоянка'},
+  {v:'marking',  l:'Розмітка 1.10 (жовта)'},
+  {v:'crossing', l:'Пішохідний перехід'},
+  {v:'driveway', l:'Виїзд з двору'},
+  {v:'other',    l:'Інше (вкажи в нотатці)'},
+];
+
+// SVG іконки дорожніх знаків
+const SIGN_ICONS = {
+  // 3.34 — Зупинка заборонена: червоне коло з жовтою перекресленою лінією
+  '3.34': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <circle cx="18" cy="18" r="16" fill="#fff" stroke="#da3633" stroke-width="3"/>
+    <circle cx="18" cy="18" r="11" fill="none" stroke="#da3633" stroke-width="3"/>
+    <line x1="7" y1="7" x2="29" y2="29" stroke="#da3633" stroke-width="3.5" stroke-linecap="round"/>
+  </svg>`,
+  // 3.35 — Стоянка заборонена: синє коло з P і рискою
+  '3.35': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <circle cx="18" cy="18" r="16" fill="#fff" stroke="#da3633" stroke-width="3"/>
+    <text x="14" y="24" font-family="Arial" font-weight="bold" font-size="16" fill="#1f6feb">P</text>
+    <line x1="7" y1="7" x2="29" y2="29" stroke="#da3633" stroke-width="3.5" stroke-linecap="round"/>
+  </svg>`,
+  // 3.34+3.35 — обидва
+  '3.34+3.35': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <circle cx="18" cy="18" r="16" fill="#fff" stroke="#da3633" stroke-width="3"/>
+    <circle cx="18" cy="18" r="11" fill="none" stroke="#da3633" stroke-width="2"/>
+    <text x="9" y="22" font-family="Arial" font-weight="bold" font-size="11" fill="#da3633">P</text>
+    <line x1="7" y1="7" x2="29" y2="29" stroke="#da3633" stroke-width="3.5" stroke-linecap="round"/>
+  </svg>`,
+  // Розмітка 1.10 — жовта пунктирна лінія
+  'marking': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <rect x="2" y="2" width="32" height="32" rx="5" fill="#1c2128" stroke="#d29922" stroke-width="2.5"/>
+    <line x1="4" y1="18" x2="10" y2="18" stroke="#d29922" stroke-width="4" stroke-linecap="round"/>
+    <line x1="14" y1="18" x2="20" y2="18" stroke="#d29922" stroke-width="4" stroke-linecap="round"/>
+    <line x1="24" y1="18" x2="30" y2="18" stroke="#d29922" stroke-width="4" stroke-linecap="round"/>
+    <text x="18" y="31" font-family="Arial" font-size="7" fill="#d29922" text-anchor="middle">1.10</text>
+  </svg>`,
+  // Пішохідний перехід — зебра + людина
+  'crossing': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <rect x="2" y="2" width="32" height="32" rx="5" fill="#1f6feb"/>
+    <rect x="5" y="22" width="26" height="4" rx="1" fill="#fff" opacity="0.9"/>
+    <rect x="5" y="28" width="26" height="4" rx="1" fill="#fff" opacity="0.9"/>
+    <circle cx="18" cy="8" r="3" fill="#fff"/>
+    <line x1="18" y1="11" x2="18" y2="19" stroke="#fff" stroke-width="2.5"/>
+    <line x1="18" y1="14" x2="13" y2="18" stroke="#fff" stroke-width="2"/>
+    <line x1="18" y1="14" x2="23" y2="18" stroke="#fff" stroke-width="2"/>
+    <line x1="18" y1="19" x2="14" y2="23" stroke="#fff" stroke-width="2"/>
+    <line x1="18" y1="19" x2="22" y2="23" stroke="#fff" stroke-width="2"/>
+  </svg>`,
+  // Виїзд з двору — стрілка + ворота
+  'driveway': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <rect x="2" y="2" width="32" height="32" rx="5" fill="#8957e5"/>
+    <rect x="6" y="24" width="8" height="10" rx="1" fill="#fff" opacity="0.9"/>
+    <rect x="22" y="24" width="8" height="10" rx="1" fill="#fff" opacity="0.9"/>
+    <polygon points="18,6 26,18 21,18 21,24 15,24 15,18 10,18" fill="#fff"/>
+  </svg>`,
+  // Інше — знак питання
+  'other': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+    <circle cx="18" cy="18" r="16" fill="#30363d" stroke="#6e7681" stroke-width="2.5"/>
+    <text x="18" y="25" font-family="Arial" font-weight="bold" font-size="20" fill="#e6edf3" text-anchor="middle">?</text>
+  </svg>`,
+};
+
+function getSignIcon(sign_type, size=36) {
+  const svg = SIGN_ICONS[sign_type] || SIGN_ICONS['other'];
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:${size}px;height:${size}px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.7))">${svg}</div>`,
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
+  });
+}
+
+function savePDR() { localStorage.setItem('pdr_points', JSON.stringify(PDR_POINTS)); }
+
+// ═══════════════════════════════════════
+// ПДР — OVERLAY (список)
+// ═══════════════════════════════════════
+function pdrOpen() {
+  renderPdrList();
+  document.getElementById('pdr-overlay').classList.add('show');
+}
+function pdrClose() {
+  document.getElementById('pdr-overlay').classList.remove('show');
+}
+
+function renderPdrList() {
+  const list  = document.getElementById('pdr-list');
+  const empty = document.getElementById('pdr-list-empty');
+  const filtered = ST.sec
+    ? PDR_POINTS.map((p,i)=>({p,i})).filter(({p})=> !p.sec || p.sec===ST.sec)
+    : PDR_POINTS.map((p,i)=>({p,i}));
+  if (!filtered.length) {
+    empty.style.display = 'block';
+    empty.innerHTML = ST.sec
+      ? `У секторі ${ST.sec} ще немає ПДР точок.<br>Натисни «Додати» і познач на карті.`
+      : `Ще немає жодної точки.<br>Натисни «Додати» і познач на карті.`;
+    list.innerHTML = ''; return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = filtered.map(({p,i}) => {
+    const sign = SIGN_TYPES.find(s=>s.v===p.sign_type);
+    const signLbl = sign ? sign.l : p.sign_type;
+    return `<div class="pdr-card">
+      <div class="pdr-card-top">
+        <div class="pdr-card-name">🚫 ${p.address||'Без адреси'}</div>
+        <button class="pdr-card-del" onclick="pdrDelete(${i})">🗑</button>
+      </div>
+      <div class="pdr-card-desc">${signLbl}${p.note?` · ${p.note}`:''}</div>
+      ${p.action_start?`<span class="pdr-card-zone">Зона дії позначена</span>`:''}
+      ${p.duplicate?`<span class="pdr-card-zone" style="background:#2d1f3d;color:#d2a8ff">Дублюючий знак</span>`:''}
+    </div>`;
+  }).join('');
+}
+
+function pdrDelete(i) {
+  PDR_POINTS.splice(i, 1);
+  savePDR();
+  renderPdrList();
+  renderPdrMapMarkers();
+}
+
+function pdrExport() {
+  if (!PDR_POINTS.length) { alert('Немає жодної точки для експорту'); return; }
+  const json = JSON.stringify(PDR_POINTS, null, 2);
+  const filename = 'pdr_' + new Date().toISOString().slice(0,10) + '.json';
+  const bytes = new TextEncoder().encode(json);
+  const blob = new Blob([bytes], {type:'application/json'});
+
+  // iOS Safari 15+ — Web Share API
+  if (navigator.share && navigator.canShare) {
+    try {
+      const file = new File([blob], filename, {type:'application/json'});
+      if (navigator.canShare({files:[file]})) {
+        navigator.share({files:[file], title:'ПДР точки'});
+        return;
+      }
+    } catch(e) {}
+  }
+
+  // Всі інші — Blob URL
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+}
+
+// Маркери ПДР на карті — тільки поточний сектор
+function renderPdrMapMarkers() {
+  pdrMapMarkers.forEach(m => map.removeLayer(m));
+  pdrZoneLines.forEach(l => map.removeLayer(l));
+  pdrMapMarkers = []; pdrZoneLines = [];
+
+  const visible = ST.sec
+    ? PDR_POINTS.filter(p => !p.sec || p.sec === ST.sec)
+    : PDR_POINTS;
+
+  visible.forEach(p => {
+    // Маркер знаку
+    const m = L.marker([p.lat, p.lon], {
+      icon: getSignIcon(p.sign_type, 24),
+      zIndexOffset: 500
+    }).addTo(map).bindPopup(`<b>${p.address}</b><br>${SIGN_TYPES.find(s=>s.v===p.sign_type)?.l||p.sign_type}`);
+    pdrMapMarkers.push(m);
+
+    // Дублюючий знак
+    if (p.duplicate) {
+      const md = L.marker([p.duplicate.lat, p.duplicate.lon], {
+        icon: getSignIcon(p.sign_type, 24),
+        zIndexOffset: 499,
+        opacity: 0.75
+      }).addTo(map).bindPopup(`Дублюючий: ${p.duplicate.address}`);
+      pdrMapMarkers.push(md);
+    }
+
+    // Лінія зони дії
+    if (p.action_start && p.action_end) {
+      const line = L.polyline([
+        [p.action_start.lat, p.action_start.lon],
+        [p.action_end.lat,   p.action_end.lon]
+      ], {color:'#da3633', weight:4, dashArray:'10,6', opacity:0.8}).addTo(map);
+      pdrZoneLines.push(line);
+    } else if (p.action_start) {
+      const line = L.polyline([
+        [p.lat, p.lon],
+        [p.action_start.lat, p.action_start.lon]
+      ], {color:'#da3633', weight:4, dashArray:'10,6', opacity:0.8}).addTo(map);
+      pdrZoneLines.push(line);
+    }
+  });
+}
+
+// ═══════════════════════════════════════
+// ПДР — WIZARD (покрокове додавання)
+// ═══════════════════════════════════════
+// Кроки: 1=знак, 2=зона дії, 3=дублюючий
+let wiz = {
+  step: 0,
+  point: {},          // накопичуємо дані
+  pickMode: null,     // що зараз пікаємо: 'sign'|'zone_start'|'zone_end'|'duplicate'
+  tempMarker: null,
+  zoneStartSet: false,
+  zoneEndSet: false,
+  dupSet: false,
+};
+
+const WIZ_STEPS = [
+  { // 0 — тип знаку
+    lbl: 'Крок 1 з 3',
+    instr: '1. Тип знаку або розмітки',
+    sub: 'Що тут встановлено?',
+    render() {
+      return `<label>Вид порушення</label>
+        <select id="w-sign-type">
+          ${SIGN_TYPES.map(s=>`<option value="${s.v}">${s.l}</option>`).join('')}
+        </select>
+        <label>Нотатка (необов'язково)</label>
+        <input type="text" id="w-note" placeholder="Наприклад: обидва боки дороги">`;
+    },
+    save() {
+      wiz.point.sign_type = document.getElementById('w-sign-type').value;
+      wiz.point.note = document.getElementById('w-note').value.trim();
+    }
+  },
+  { // 1 — позначити знак на карті
+    lbl: 'Крок 1 з 3',
+    instr: '2. Де стоїть знак?',
+    sub: 'Натисни на карті точне місце знаку або розмітки',
+    render() {
+      const p = wiz.point;
+      if (p.lat) {
+        return `<div style="color:#3fb950;font-size:14px">✓ Позначено: ${p.address||p.lat.toFixed(5)+', '+p.lon.toFixed(5)}</div>
+          <div style="color:#6e7681;font-size:12px;margin-top:6px">Натисни ще раз щоб перемістити</div>`;
+      }
+      return `<div style="color:#6e7681;font-size:14px">Натисни на карті де стоїть знак</div>`;
+    },
+    save() {}
+  },
+  { // 2 — зона дії (необов'язково)
+    lbl: 'Крок 2 з 3',
+    instr: '3. Кінець зони дії',
+    sub: 'Знак = початок зони. Познач де закінчується заборона. Можна пропустити.',
+    render() {
+      const p = wiz.point;
+      if (p.action_end) {
+        return `<div style="color:#3fb950;font-size:13px">✓ Кінець зони: ${p.action_end.address||'позначено'}</div>
+          <button onclick="wizPickZoneEnd()" style="width:100%;padding:10px;background:#1c2128;border:1px solid #30363d;border-radius:8px;color:#6e7681;font-size:13px;cursor:pointer;margin-top:8px">↩ Перепозначити</button>`;
+      }
+      return `<button onclick="wizPickZoneEnd()" style="width:100%;padding:14px;background:#1c2128;border:1px solid #30363d;border-radius:8px;color:#e6edf3;font-size:15px;cursor:pointer">📍 Позначити кінець зони</button>
+        <div style="color:#6e7681;font-size:12px;margin-top:8px;text-align:center">або натисни «Далі» щоб пропустити</div>`;
+    },
+    save() {
+      // Якщо кінець зони є — автоматично встановлюємо початок = знак
+      if (wiz.point.action_end) {
+        wiz.point.action_start = {lat: wiz.point.lat, lon: wiz.point.lon, address: wiz.point.address};
+      }
+    }
+  },
+  { // 3 — дублюючий знак (необов'язково)
+    lbl: 'Крок 3 з 3',
+    instr: '4. Дублюючий знак',
+    sub: 'Якщо є другий знак (інший бік дороги або дублюючий) — познач його. Можна пропустити.',
+    render() {
+      const p = wiz.point;
+      if (p.duplicate) {
+        return `<div style="color:#3fb950;font-size:13px">✓ Дублюючий знак: ${p.duplicate.address||'позначено'}</div>`;
+      }
+      return `<button onclick="wizPickDuplicate()" style="width:100%;padding:12px;background:#1c2128;border:1px solid #30363d;border-radius:8px;color:#e6edf3;font-size:14px;cursor:pointer">📍 Позначити дублюючий знак</button>`;
+    },
+    save() {}
+  }
+];
+
+function pdrStartAdd() {
+  pdrClose();
+  wiz.step = 0;
+  wiz.point = {};
+  wiz.tempMarker = null;
+  wizRender();
+  document.getElementById('pdr-wizard').classList.add('show');
+}
+
+function wizRender() {
+  const s = WIZ_STEPS[wiz.step];
+  document.getElementById('wiz-step-lbl').textContent = s.lbl;
+  document.getElementById('wiz-instruction').innerHTML =
+    `${s.instr}<div class="wiz-sub">${s.sub}</div>`;
+  document.getElementById('wiz-form').innerHTML = s.render();
+  document.getElementById('wiz-back-btn').style.display = wiz.step > 0 ? 'block' : 'none';
+
+  // Крок 1 (карта) — показуємо підказку
+  if (wiz.step === 1) {
+    showMapHint('Натисни на карті — де стоїть знак');
+    wizStartPick('sign'); // це вже додає pick-mode клас
+    document.getElementById('wiz-next-btn').textContent = wiz.point.lat ? 'Далі →' : 'Пропустити';
+  } else {
+    document.getElementById('pdr-wizard').classList.remove('pick-mode');
+    if (wiz.step === 3) {
+      document.getElementById('wiz-next-btn').textContent = 'Зберегти ✓';
+    } else {
+      document.getElementById('wiz-next-btn').textContent = 'Далі →';
+    }
+    hideMapHint();
+  }
+}
+
+function wizNext() {
+  WIZ_STEPS[wiz.step].save();
+
+  if (wiz.step === 0) {
+    wiz.step = 1; wizRender(); return;
+  }
+  if (wiz.step === 1) {
+    if (!wiz.point.lat) { alert('Познач місце знаку на карті'); return; }
+    stopPick(); wiz.step = 2; wizRender(); return;
+  }
+  if (wiz.step === 2) {
+    stopPick(); wiz.step = 3; wizRender(); return;
+  }
+  if (wiz.step === 3) {
+    // Зберігаємо
+    stopPick();
+    wiz.point.id = Date.now();
+    wiz.point.sec = ST.sec || null;
+    PDR_POINTS.push({...wiz.point});
+    savePDR();
+    renderPdrMapMarkers();
+    document.getElementById('pdr-wizard').classList.remove('show');
+    hideMapHint();
+    // Показуємо overlay знову
+    setTimeout(() => pdrOpen(), 150);
+    return;
+  }
+}
+
+function wizBack() {
+  stopPick();
+  if (wiz.step > 0) { wiz.step--; wizRender(); }
+}
+function wizCancel() {
+  stopPick();
+  if (wiz.tempMarker) { map.removeLayer(wiz.tempMarker); wiz.tempMarker = null; }
+  document.getElementById('pdr-wizard').classList.remove('show');
+  hideMapHint();
+}
+
+// Пікер на карті
+function wizStartPick(mode) {
+  wiz.pickMode = mode;
+  document.getElementById('pdr-wizard').classList.add('pick-mode');
+  map.once('click', onMapPick);
+}
+function stopPick() {
+  map.off('click', onMapPick);
+  wiz.pickMode = null;
+  document.getElementById('pdr-wizard').classList.remove('pick-mode');
+}
+async function onMapPick(e) {
+  const lat = e.latlng.lat, lon = e.latlng.lng;
+  const addr = await reverseGeocode(lat, lon);
+  document.getElementById('pdr-wizard').classList.remove('pick-mode');
+
+  if (wiz.pickMode === 'sign') {
+    if (wiz.tempMarker) map.removeLayer(wiz.tempMarker);
+    wiz.tempMarker = L.marker([lat,lon], {
+      icon: getSignIcon(wiz.point.sign_type || '3.34', 36)
+    }).addTo(map);
+    wiz.point.lat = lat; wiz.point.lon = lon; wiz.point.address = addr;
+    wiz.pickMode = null;
+    document.getElementById('wiz-next-btn').textContent = 'Далі →';
+    document.getElementById('wiz-form').innerHTML = WIZ_STEPS[1].render();
+    hideMapHint();
+    // Слухаємо ще раз — якщо хоче перемістити
+    map.once('click', onMapPick);
+    wiz.pickMode = 'sign'; // залишаємо в режимі sign для переміщення
+    document.getElementById('pdr-wizard').classList.remove('pick-mode'); // але фон прибраний
+
+  } else if (wiz.pickMode === 'zone_start') {
+    wiz.point.action_start = {lat, lon, address: addr};
+    wiz.pickMode = null;
+    hideMapHint();
+    wizRender();
+  } else if (wiz.pickMode === 'zone_end') {
+    wiz.point.action_end = {lat, lon, address: addr};
+    wiz.pickMode = null;
+    hideMapHint();
+    wizRender();
+  } else if (wiz.pickMode === 'duplicate') {
+    wiz.point.duplicate = {lat, lon, address: addr};
+    wiz.pickMode = null;
+    hideMapHint();
+    wizRender();
+  }
+}
+
+function wizPickZoneStart() {
+  showMapHint('Натисни — де починається заборона');
+  wizStartPick('zone_start');
+}
+function wizPickZoneEnd() {
+  showMapHint('Натисни — де закінчується заборона');
+  wizStartPick('zone_end');
+}
+function wizPickDuplicate() {
+  showMapHint('Натисни — де стоїть дублюючий знак');
+  wizStartPick('duplicate');
+}
+
+// Зворотне геокодування через Nominatim
+async function reverseGeocode(lat, lon) {
   try {
-    const data = await(await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(q)}`)).json();
-    const raw=[]; const seen=new Set();
-    data.elements.forEach(e=>{
-      const t=e.tags||{},elat=e.lat||(e.center?.lat),elon=e.lon||(e.center?.lon);
-      if(!elat||!t['addr:housenumber'])return;
-      raw.push({st:t['addr:street']||'?', n:t['addr:housenumber'], d:dm(lat,lon,elat,elon)});
-    });
-    raw.sort((a,b)=>a.d-b.d);
-    const uniq = raw.filter(a=>{ const k=a.st+a.n; if(seen.has(k))return false; seen.add(k); return true; }).slice(0,8);
-    el.innerHTML = uniq.length ? uniq.map(a=>`
-      <div class="a-row">
-        <div><div class="a-st">${a.st}</div><div class="a-d">${fm(a.d)}</div></div>
-        <div class="a-n">${a.n}</div>
-      </div>`).join('') : '<div style="color:#6e7681">Будинків не знайдено</div>';
-  } catch { el.innerHTML = '<div style="color:#f85149">⚠ Немає інтернету</div>'; }
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`, {headers:{'User-Agent':'lviv-inspector/1.0'}});
+    const d = await r.json();
+    const t = d.address || {};
+    const num  = t.house_number || '';
+    const road = t.road || t.pedestrian || t.footway || '';
+    if (road) return road + (num ? ', ' + num : '');
+  } catch {}
+  return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+}
+
+function showMapHint(txt) {
+  const el = document.getElementById('map-hint');
+  el.textContent = txt; el.classList.add('show');
+}
+function hideMapHint() {
+  document.getElementById('map-hint').classList.remove('show');
 }
 
 // ═══════════════════════════════════════
-// ТАЙМЕР
+// ОРЕНДА — дані і функції
 // ═══════════════════════════════════════
-let tSec=600, tInt=null, tOn=false;
-function tf(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
-function tRender(){
-  const el=document.getElementById('t-disp');
-  el.textContent = tSec<=0?'✓ ШТРАФ':tf(tSec);
-  el.className = tSec<=0?'done':tSec<=120?'warn':'';
-}
-function timerStart(){
-  if(tOn)return; tSec=600; tOn=true; tRender();
-  tInt=setInterval(()=>{ if(tSec>0){tSec--;tRender();}else{clearInterval(tInt);tOn=false;if(navigator.vibrate)navigator.vibrate([400,100,400,100,400]);} },1000);
-}
-function timerReset(){ clearInterval(tInt); tOn=false; tSec=600; tRender(); }
+let RENT_POINTS = JSON.parse(localStorage.getItem('rent_points')||'[]');
+let rentMapMarkers = [];
+let rentWizState = {picking: false, lat: null, lon: null, address: null};
 
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
+function saveRent() { localStorage.setItem('rent_points', JSON.stringify(RENT_POINTS)); }
+
+function rentOpen() {
+  renderRentList();
+  document.getElementById('rent-overlay').style.display = 'flex';
+}
+function rentClose() {
+  document.getElementById('rent-overlay').style.display = 'none';
+}
+
+// Список орендованих
+function renderRentList() {
+  const list  = document.getElementById('rent-list');
+  const empty = document.getElementById('rent-list-empty');
+  if (!RENT_POINTS.length) { empty.style.display='block'; list.innerHTML=''; return; }
+  empty.style.display = 'none';
+  list.innerHTML = RENT_POINTS.map((p,i) => `
+    <div class="pdr-card">
+      <div class="pdr-card-top">
+        <div class="pdr-card-name" style="color:#da3633;">🅿 ${p.address||'Без адреси'}</div>
+        <button class="pdr-card-del" onclick="rentDelete(${i})">🗑</button>
+      </div>
+      ${p.note ? `<div class="pdr-card-desc">${p.note}</div>` : ''}
+    </div>`).join('');
+}
+
+function rentDelete(i) {
+  RENT_POINTS.splice(i,1);
+  saveRent();
+  renderRentList();
+  renderRentMapMarkers();
+}
+
+// Wizard — крок 1: тап на карту; крок 2: нотатка + зберегти
+function rentStartAdd() {
+  rentClose(); // закриваємо overlay перед тапом на карту
+  rentWizState = {picking: true, lat: null, lon: null, address: null};
+  document.getElementById('rent-wizard').style.display = 'block';
+  document.getElementById('rent-wizard').classList.add('pick-mode');
+  rentWizRender();
+  showMapHint('Натисни на карті — орендоване місце');
+  map.once('click', onRentMapPick);
+}
+
+function rentWizRender() {
+  const s = rentWizState;
+  const content = document.getElementById('rent-wiz-content');
+  const btn = document.getElementById('rent-wiz-btn');
+  if (!s.lat) {
+    content.innerHTML = `<div style="color:#6e7681;font-size:14px;">Натисни на карті де знаходиться орендоване місце</div>`;
+    btn.textContent = 'Пропустити';
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+  } else {
+    content.innerHTML = `
+      <div style="color:#3fb950;font-size:14px;margin-bottom:10px;">✓ ${s.address||s.lat.toFixed(5)+', '+s.lon.toFixed(5)}</div>
+      <input type="text" id="rent-note" placeholder="Нотатка (необов'язково)"
+        style="width:100%;background:#0d1117;border:1px solid #30363d;border-radius:8px;color:#e6edf3;font-size:15px;padding:12px;outline:none;box-sizing:border-box;">`;
+    btn.textContent = 'Зберегти ✓';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+async function onRentMapPick(e) {
+  const lat = e.latlng.lat, lon = e.latlng.lng;
+  const addr = await reverseGeocode(lat, lon);
+  rentWizState.lat = lat; rentWizState.lon = lon; rentWizState.address = addr;
+  rentWizState.picking = false;
+  document.getElementById('rent-wizard').classList.remove('pick-mode');
+  hideMapHint();
+  rentWizRender();
+}
+
+function rentWizNext() {
+  if (!rentWizState.lat) return;
+  const note = (document.getElementById('rent-note')?.value||'').trim();
+  RENT_POINTS.push({id: Date.now(), lat: rentWizState.lat, lon: rentWizState.lon,
+    address: rentWizState.address, note});
+  saveRent();
+  renderRentMapMarkers();
+  document.getElementById('rent-wizard').style.display = 'none';
+  hideMapHint();
+  setTimeout(() => rentOpen(), 150);
+}
+
+function rentCancel() {
+  map.off('click', onRentMapPick);
+  document.getElementById('rent-wizard').style.display = 'none';
+  document.getElementById('rent-wizard').classList.remove('pick-mode');
+  hideMapHint();
+}
+
+// Маркери на карті
+function renderRentMapMarkers() {
+  rentMapMarkers.forEach(m => map.removeLayer(m));
+  rentMapMarkers = [];
+  RENT_POINTS.forEach(p => {
+    const m = L.marker([p.lat, p.lon], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div style="width:36px;height:36px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.7))"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36"><circle cx="18" cy="18" r="16" fill="#da3633" stroke="#ff7b72" stroke-width="2"/><text x="18" y="24" font-family="Arial" font-weight="bold" font-size="18" fill="#fff" text-anchor="middle">P</text></svg></div>`,
+        iconSize:[36,36], iconAnchor:[18,18]
+      }), zIndexOffset: 400
+    }).addTo(map).bindPopup(`<b>Оренда</b><br>${p.address||''}${p.note?'<br>'+p.note:''}`);
+    rentMapMarkers.push(m);
+  });
+}
+
+function rentExport() {
+  if (!RENT_POINTS.length) { alert('Немає орендованих місць для експорту'); return; }
+  const json = JSON.stringify(RENT_POINTS, null, 2);
+  const filename = 'rent_' + new Date().toISOString().slice(0,10) + '.json';
+  const bytes = new TextEncoder().encode(json);
+  const blob = new Blob([bytes], {type:'application/json'});
+  if (navigator.share && navigator.canShare) {
+    try {
+      const file = new File([blob], filename, {type:'application/json'});
+      if (navigator.canShare({files:[file]})) { navigator.share({files:[file], title:'Оренда'}); return; }
+    } catch(e) {}
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+}
+
+// pick-mode для rent-wizard (прозорий фон під час тапу)
+
 renderSecGrid();
 renderPkList();
 renderPkMarkers();
+renderPdrMapMarkers();
+renderRentMapMarkers();
 adjustMapBottom();
 window.addEventListener('resize', adjustMapBottom);
 </script>
